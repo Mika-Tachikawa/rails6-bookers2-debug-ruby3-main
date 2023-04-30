@@ -10,6 +10,14 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
   resources :users, only: [:index,:show,:edit,:update]
+  
+  resources :book_images, only: [:new, :create, :index, :show, :destroy] do
+  resources :book_comments, only: [:create]
+  end
+  
+  #１投稿に１回しかいいねしないので、削除の際はユーザーidとbookのidがわかればいい
+  #なので、単数系にして、いいねの/:idがurlに含まれなくなってもよい
+  resource :favorites, only: [:create, :destroy]
 
 #endの追記
 end

@@ -6,6 +6,8 @@ class Book < ApplicationRecord
   
   #has_many → belomgs_toの修正
   belongs_to :user
+  has_many :book_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   
   #profile_imageがなかった時の表示内容の追記
   def get_profile_image
@@ -18,6 +20,10 @@ class Book < ApplicationRecord
     #end
       #profile_image.variant(resize_to_limit: [width, height]).processed
   #end
+  
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
   
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}

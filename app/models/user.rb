@@ -9,6 +9,8 @@ class User < ApplicationRecord
   #ユーザー削除と同時に投稿記事全削除＝dependent: :destroy
   has_many :books, dependent: :destroy
   has_one_attached :profile_image
+  has_many :book_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   #validates :title, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :title, length: { maximum: 20 }, uniqueness: true
