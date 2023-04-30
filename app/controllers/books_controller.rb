@@ -8,8 +8,8 @@ before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   end
 
   def index
-    @book = Book.new
     @books = Book.all
+    @book = Book.new
   end
 
   def create
@@ -24,8 +24,8 @@ before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   end
 
   def edit
-    @book = Book.find(params[:id])
-    @user = User.find(params[:id])
+    #@book = Book.find(params[:id])
+    #@user = User.find(params[:id])
   end
 
   def update

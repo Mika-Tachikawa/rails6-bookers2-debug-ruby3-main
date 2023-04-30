@@ -13,7 +13,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   #validates :title, length: { minimum: 2, maximum: 20 }, uniqueness: true
-  validates :title, length: { maximum: 20 }, uniqueness: true
+  #validates :title, length: { maximum: 20 }, uniqueness: true
+  validates :name, length: { maximum: 20 }, uniqueness: true
   validates :introduction, length: {maximum: 50}
   #バリデーションの追加が不明
   
