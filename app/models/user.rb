@@ -12,7 +12,8 @@ class User < ApplicationRecord
 
   #validates :title, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :title, length: { maximum: 20 }, uniqueness: true
-  #バリデーションの追加が
+  validates :introduction, length: {maximum: 50}
+  #バリデーションの追加が不明
   
   
   def get_profile_image
