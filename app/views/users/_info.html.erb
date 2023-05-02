@@ -9,15 +9,17 @@
 	  <th><%= user.introduction %></th>
   </tr>
     <tr>
-    <th><%= link_to 'フォロー数',  [user, :followings] %></th>
-  </tr>          
-    <th><%= link_to 'フォロワー数',  [user, :followers] %></th>
+        <th><p>follows</p></th>
+    </tr>
+    <tr>
+        <th><P>followers</P></th>
+    </tr>
 </table>
 
       <% if current_user.following?(user) %>
-          <%= link_to "フォロー外す", book_user_relationships_path(user.id), method: :delete %>
+          <%= link_to "フォロー外す", user_path(user), method: :delete %>
       <% else %>
-          <%= link_to "フォローする", book_user_relationships_path(user.id), method: :post %>
+          <%= link_to "フォローする", user_path(user), method: :post %>
       <% end %>
 　
 <div class='row'>
