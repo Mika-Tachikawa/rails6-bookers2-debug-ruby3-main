@@ -11,6 +11,14 @@
       <tr>
         <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
         <td><%= user.name %></td>
+        <td><% if current_user.following?(user) %>
+            <%= link_to "フォロー外す", book_user_relationships_path(users.id), method: :delete %>
+            <% else %>
+            <%= link_to "フォローする", book_user_relationships_path(users.id), method: :post %>
+            <% end %></td>
+            <div>
+        <td><%= link_to 'フォロー数',  [users, :followings] %></td>
+        <td><%= link_to 'フォロワー数',  [users, :followers] %></td>
         <td><%= link_to 'Show', user %></td>
       </tr>
     <% end %>

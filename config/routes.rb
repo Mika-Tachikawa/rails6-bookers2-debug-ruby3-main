@@ -13,6 +13,12 @@ Rails.application.routes.draw do
    #なので、単数系にして、いいねの/:idがurlに含まれなくなってもよい
    resource :favorites, only: [:create, :destroy]
    resources :book_comments, only: [:create, :destroy]
+     # ネストさせる
+   resources :users do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+   end
   end
   
   resources :users, only: [:index,:show,:edit,:update]
