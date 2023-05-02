@@ -1,15 +1,25 @@
 class RelationshipController < ApplicationController
 
-  # フォローするとき  
+ #特定のアクションを実行する前に、ユーザーの認証が必要であることを示すメソッド
+ #before_actionは、指定したアクションが実行される前に、事前に実行されるメソッドを指定するためのメソッド
+ #authenticate_user!は、DeviseというGemが提供するメソッド
+ #before_action :authenticate_user!をコントローラー内で宣言することで、
+ #そのコントローラー内で定義されたアクションが実行される前に、ユーザーの認証が自動的に行われるようになる
+ #ユーザーがログインしていない場合は、ログインページにリダイレクト
+  before_action :authenticate_user!
+  
+ #フォローするとき
   def create
-    current_user.follow(params[:user_id])
-    redirect_to request.referer
+    user = User.find(params[:user_id])
+    current_user.follow(user)
+		redirect_to request.referer
   end
-
-  # フォロー外すとき
+  
+ #フォロー解除するとき
   def destroy
-    current_user.unfollow(params[:user_id])
-    redirect_to request.referer 
+    user = User.find(params[:user_id])
+    current_user.unfollow(user)
+		redirect_to request.referer
   end
   
     # フォロー一覧
