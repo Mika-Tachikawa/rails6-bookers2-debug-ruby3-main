@@ -1,4 +1,4 @@
-class RelationshipController < ApplicationController
+class RelationshipsController < ApplicationController
 
  #特定のアクションを実行する前に、ユーザーの認証が必要であることを示すメソッド
  #before_actionは、指定したアクションが実行される前に、事前に実行されるメソッドを指定するためのメソッド

@@ -15,7 +15,8 @@
 <!-- relationships/btnは、app/views/relationships/_btn.html.erbというパーシャルを示している -->
 <!-- relationships/btnは、ユーザーのフォロー・アンフォローに使われることが多い -->
 <!-- userの情報に基づいてボタンの表示を変更することができる -->
-        <td><%= render "relationships/btn", user: user %></td>        
+        <td><%= render "relationships/btn", user: user %></td>       
+        
 <!-- ユーザーidを含むCSSクラスをclass属性に追加、ユーザーごとに違うスタイルを適用できるようになる -->
         <td><%= link_to 'Show', user ,class: "user_#{user.id}"%></td>
       </tr>

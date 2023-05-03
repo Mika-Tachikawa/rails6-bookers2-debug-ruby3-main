@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   before_action :authenticate_user!
   #before_action :ensure_correct_user, only: [:update] から修正  
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update]
 
 
   def show
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   #def ensure_correct_user から修正
-  def is_matching_login_user
+  def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user
       redirect_to user_path(current_user)
