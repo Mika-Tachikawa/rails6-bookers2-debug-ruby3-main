@@ -1,4 +1,5 @@
 class BookCommentsController < ApplicationController
+  before_action :authenticate_user!
   
   #def create
     #post_image = PostImage.find(params[:post_image_id])
@@ -8,21 +9,23 @@ class BookCommentsController < ApplicationController
     #redirect_to post_image_path(post_image)
   #end
   def create
-    book = Book.find(params[:book_id])
-    comment = current_user.book_comments.new(book_comment_params)
-    comment.book_id = book.id
-    comment.save
+    @book = Book.find(params[:book_id])
+    @book_comment = BookComment.new(book_comment_params)
+    @book_comment.book_id = @book.id
+    @book_comment.user_id = current_user.id
+    unless @book_comment.save
     #redirect_to request.referer
     #リダイレクト先をjsファイルに変更
-    render :book_comments 
+      render 'error'  # app/views/book_comments/error.js.erbを参照する ※要件外
+    end
+    # app/views/book_comments/create.js.erbを参照する
   end
 
   def destroy
-    BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    #redirect_to request.referer
-    #renderしたときに@bookのデータがないので@bookを定義
-    @book = Book.find(params[:book_id])  
-    render :book_comments  #render先にjsファイルを指定
+    @book = Book.find(params[:book_id])
+    book_comment = @book.book_comments.find(params[:id])
+    book_comment.destroy
+    # app/views/book_comments/destroy.js.erbを参照する
   end
 
   private
