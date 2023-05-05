@@ -12,12 +12,17 @@ class BookCommentsController < ApplicationController
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = book.id
     comment.save
-    redirect_to request.referer
+    #redirect_to request.referer
+    #リダイレクト先をjsファイルに変更
+    render :book_comments 
   end
 
   def destroy
     BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    redirect_to request.referer
+    #redirect_to request.referer
+    #renderしたときに@bookのデータがないので@bookを定義
+    @book = Book.find(params[:book_id])  
+    render :book_comments  #render先にjsファイルを指定
   end
 
   private
